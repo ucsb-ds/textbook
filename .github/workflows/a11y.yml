@@ -23,7 +23,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build Jupyter Book
-        run: jupyter-book build .
+        run: jupyter-book build --html
 
       # 2. Setup Node environment for Axe
       - name: Setup Node.js
@@ -38,7 +38,7 @@ jobs:
       - name: Run Axe Checks
         run: |
           # A. Start a local server in the background
-          npx http-server _build/html -p 8080 &
+          npx http-server ./_build/html -p 8080 &
           sleep 5
           
           # B. Generate the URL list from the actual build artifacts
