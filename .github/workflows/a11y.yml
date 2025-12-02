@@ -48,8 +48,7 @@ jobs:
           # 4. Save to a variable (tr replaces newlines with spaces)
           
           cd _build/html
-          URLS=$(find . -name "*.html" | sed 's|^\./||' | sed 's|^|http://localhost:8080/|' | tr '\n' ' ')
-          
+          URLS=$(find . -name "*.html" -not -path "*/build/*" | sed 's|^\./||' | sed 's|^|http://localhost:8080/|' | tr '\n' ' ')          
           echo "Testing the following URLs:"
           echo "$URLS"
           
