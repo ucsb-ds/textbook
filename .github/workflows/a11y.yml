@@ -1,0 +1,59 @@
+name: Accessibility Checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  axe-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Setup Python & Build the Book
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build Jupyter Book
+        run: jupyter-book build .
+
+      # 2. Setup Node environment for Axe
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Axe CLI and HTTP Server
+        run: npm install -g @axe-core/cli http-server
+
+      # 3. Serve, Discover URLs, and Run Axe
+      - name: Run Axe Checks
+        run: |
+          # A. Start a local server in the background
+          npx http-server _build/html -p 8080 &
+          sleep 5
+          
+          # B. Generate the URL list from the actual build artifacts
+          # 1. Enter build dir
+          # 2. Find all .html files
+          # 3. Format them as http://localhost:8080/filename.html
+          # 4. Save to a variable (tr replaces newlines with spaces)
+          
+          cd _build/html
+          URLS=$(find . -name "*.html" | sed 's|^\./||' | sed 's|^|http://localhost:8080/|' | tr '\n' ' ')
+          
+          echo "Testing the following URLs:"
+          echo "$URLS"
+          
+          # C. Run Axe CLI on the discovered URLs
+          axe $URLS \
+            --tags wcag2a,wcag2aa,wcag21a,wcag21aa \
+            --exit
