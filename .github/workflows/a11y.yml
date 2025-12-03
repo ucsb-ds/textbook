@@ -43,15 +43,8 @@ jobs:
           sleep 5
           
           # B. Generate the URL list from the actual build artifacts
-          # 1. Enter build dir
-          # 2. Find all .html files
-          # 3. Format them as http://localhost:8080/filename.html
-          # 4. Save to a variable (tr replaces newlines with spaces)
-          
           cd _build/html
           URLS=$(find . -name "*.html" -not -path "*/build/*" | sed 's|^\./||' | sed 's|^|http://localhost:8080/|' | tr '\n' ' ')          
-          echo "Testing the following URLs:"
-          echo "$URLS"
           
           # C. Run Axe CLI on the discovered URLs
           axe $URLS \
