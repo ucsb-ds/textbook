@@ -134,6 +134,7 @@ project:
       children:
         - file: chapters/18/1/More_Likely_than_Not_Binary_Classifier.ipynb
         - file: chapters/18/2/Making_Decisions.ipynb
+
 site:
   options:
     logo: data8logo.png

@@ -1,5 +1,7 @@
 # Computational and Inferential Thinking
 
+[![Jupyter Book (via myst) GitHub Pages Deploy](https://github.com/data-8/textbook/actions/workflows/deploy-jb2.yml/badge.svg)](https://github.com/data-8/textbook/actions/workflows/deploy-jb2.yml) [![Accessibility Checks](https://github.com/data-8/textbook/actions/workflows/a11y.yml/badge.svg)](https://github.com/data-8/textbook/actions/workflows/a11y.yml)
+
 This repository holds the Jupyter Book source for Computational and Inferential
 Thinking: The Foundations of Data Science.
 
