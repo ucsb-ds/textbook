@@ -39,6 +39,8 @@ jobs:
         run: npm install -g jupyter-book
       - name: Build HTML Assets
         run: jupyter-book build --html
+      - name: Copy Data Assets
+        run: cp -r assets/data _build/html/
       - name: Create redirects from JB1 to JB2
         run: |
           # Generate redirects in a separate directory
