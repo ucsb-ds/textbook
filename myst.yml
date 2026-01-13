@@ -3,6 +3,7 @@ project:
   title: Computational and Inferential Thinking
   numbering:
     title: true
+    headings: true
   authors:
     - name: Ani Adhikari
     - name: John DeNero
