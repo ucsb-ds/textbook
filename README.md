@@ -34,4 +34,4 @@ To build locally, `pip install -r requirements.txt` and then `jupyter-book build
 
 **Follow the build instructions on the Jupyter Book guide**. The guide has
 information for how to use the Jupyter Book CLI to build this book. You can find
-the [Jupyter Book build instructions here](https://jupyterbook.org/start/build.html).
+the [Jupyter Book build instructions here](https://jupyterbook.org/stable/get-started/build-websites/).
