@@ -4,6 +4,7 @@ import glob
 import shutil
 import os
 from pprint import pprint
+import google_drive_tools
 
 import re
 
@@ -53,10 +54,27 @@ def list_data_files(notebooks_directory, data_directory):
                     else:
                         csvs[key] = [csv_file]
 
-    pprint(csvs)
+    return csvs
 
 
 
 if __name__ == "__main__":
     csvs = list_data_files("notebooks", "assets/data")
     pprint(csvs)
+
+    data_file_dict = google_drive_tools.get_data_file_name_to_id_mapping()
+    pprint(data_file_dict)
+
+    for key in sorted(csvs.keys()):
+        print("*" * 20)
+        print(f"Notebook: {key}")
+        print("*" * 20)
+        print("")
+        print("!pip install --quiet datascience")
+        print("!mkdir -p /content/data")
+        for csv_file in csvs[key]:
+            file_id = data_file_dict.get(csv_file).get('id')
+            print(f"!gdown {file_id} --quiet --fuzzy -O /content/data/{csv_file}")
+        print("path_data = '/content/data/'")
+        print("!ls /content/data")
+        print("\n\n\n")

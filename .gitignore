@@ -1,6 +1,7 @@
 notebooks
 data
 credentials.json
+google_drive_token.json
 
 **/.DS_Store
 
